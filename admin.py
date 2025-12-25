@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import (
     Course,
+    Instructor,
+    Learner,
     Lesson,
     Question,
     Choice,
-    Submission,
-    Enrollment
+    Submission
 )
 
 class ChoiceInline(admin.TabularInline):
@@ -27,8 +28,9 @@ class LessonAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Course)
+admin.site.register(Instructor)
+admin.site.register(Learner)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
 admin.site.register(Submission)
-admin.site.register(Enrollment)
