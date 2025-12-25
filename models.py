@@ -9,26 +9,18 @@ class Course(models.Model):
         return self.name
 
 
-class Instructor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
-
-
-class Learner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user.username
-
-
 class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
 
     def __str__(self):
         return self.title
+
+
+class Enrollment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    date_enrolled = models.DateTimeField(auto_now_add=True)
 
 
 class Question(models.Model):
@@ -50,6 +42,6 @@ class Choice(models.Model):
 
 
 class Submission(models.Model):
-    learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
     choices = models.ManyToManyField(Choice)
     score = models.IntegerField(default=0)
